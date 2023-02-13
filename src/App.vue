@@ -1,0 +1,94 @@
+<script setup>
+import { ref } from "vue";
+
+const showModal = ref(false);
+
+const openModal = () => {
+  showModal.value = true;
+};
+
+const closeModal = () => {
+  showModal.value = false;
+};
+</script>
+
+<template>
+  <div>
+    <div class="container mx-auto">
+      <!-- Modal Section -->
+
+      <div
+        @click="closeModal"
+        v-if="showModal"
+        class="absolute h-full w-full z-10 bg-opacity-90 bg-black flex items-center justify-center"
+      >
+        <div class="flex justify-center">
+          <div
+            @click.stop
+            class="mb-3 xl:w-96 bg-white rounded p-8 bg-opacity-100"
+          >
+            <div class="flex flex-col gap-1">
+              <textarea
+                class="form-control block w-full h-32 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                placeholder="Your message"
+              ></textarea>
+              <button
+                class="bg-purple-700 text-white text-center w-full p-1 hover:bg-purple-600"
+              >
+                Add Note
+              </button>
+
+              <button
+                @click="closeModal"
+                class="bg-red-700 text-white text-center w-full p-1 hover:bg-red-600"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Section -->
+      <div class="flex items-center justify-between p-8">
+        <div>
+          <h2 class="text-6xl font-extrabold">Notes</h2>
+        </div>
+        <div class="p-4">
+          <button
+            @click="openModal"
+            class="font-extrabold bg-black rounded-full text-white w-12 h-12 hover:bg-gray-700"
+          >
+            +
+          </button>
+        </div>
+      </div>
+
+      <!-- Card Section -->
+
+      <div class="flex gap-4 p-8">
+        <div
+          class="bg-yellow-300 rounded h-48 p-4 w-1/4 flex flex-col justify-between"
+        >
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque,
+            repellat?
+          </p>
+          <p>12/23/2023</p>
+        </div>
+
+        <div
+          class="bg-purple-300 rounded h-48 p-4 w-1/4 flex flex-col justify-between"
+        >
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque,
+            repellat?
+          </p>
+          <p>12/23/2023</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
