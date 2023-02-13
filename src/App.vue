@@ -10,6 +10,24 @@ const openModal = () => {
 const closeModal = () => {
   showModal.value = false;
 };
+
+const newNote = ref("");
+const notes = ref([]);
+
+function getRandomColor() {
+  return "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+}
+
+const addNote = () => {
+  notes.value.push({
+    id: Math.floor(Math.random() * 1000000),
+    text: newNote.value,
+    date: new Date(),
+    bgColor: getRandomColor(),
+  });
+  showModal.value = false;
+  newNote.value = "";
+};
 </script>
 
 <template>
@@ -29,12 +47,14 @@ const closeModal = () => {
           >
             <div class="flex flex-col gap-1">
               <textarea
+                v-model="newNote"
                 class="form-control block w-full h-32 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 id="exampleFormControlTextarea1"
                 rows="3"
                 placeholder="Your message"
               ></textarea>
               <button
+                @click="addNote"
                 class="bg-purple-700 text-white text-center w-full p-1 hover:bg-purple-600"
               >
                 Add Note
@@ -68,25 +88,17 @@ const closeModal = () => {
 
       <!-- Card Section -->
 
-      <div class="flex gap-4 p-8">
+      <div class="grid grid-cols-4 gap-4 px-8">
         <div
-          class="bg-yellow-300 rounded h-48 p-4 w-1/4 flex flex-col justify-between"
+          v-for="(note, index) in notes"
+          :key="index"
+          class="rounded h-48 p-4 col-span-1"
+          :style="{ backgroundColor: note.bgColor }"
         >
           <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque,
-            repellat?
+            {{ note.text }}
           </p>
-          <p>12/23/2023</p>
-        </div>
-
-        <div
-          class="bg-purple-300 rounded h-48 p-4 w-1/4 flex flex-col justify-between"
-        >
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque,
-            repellat?
-          </p>
-          <p>12/23/2023</p>
+          <p>{{ note.date.toLocaleDateString("en-us") }}</p>
         </div>
       </div>
     </div>
