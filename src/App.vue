@@ -19,6 +19,9 @@ function getRandomColor() {
 }
 
 const addNote = () => {
+  if (newNote.value.length < 10) {
+    return (errorMessage.value = "Notes need to 10 Chracter At Least!!");
+  }
   notes.value.push({
     id: Math.floor(Math.random() * 1000000),
     text: newNote.value,
@@ -28,6 +31,8 @@ const addNote = () => {
   showModal.value = false;
   newNote.value = "";
 };
+
+const errorMessage = ref("");
 </script>
 
 <template>
@@ -53,6 +58,8 @@ const addNote = () => {
                 rows="3"
                 placeholder="Your message"
               ></textarea>
+
+              <p v-if="errorMessage" class="text-red-600">{{ errorMessage }}</p>
               <button
                 @click="addNote"
                 class="bg-purple-700 text-white text-center w-full p-1 hover:bg-purple-600"
@@ -92,7 +99,7 @@ const addNote = () => {
         <div
           v-for="(note, index) in notes"
           :key="index"
-          class="rounded h-48 p-4 col-span-1"
+          class="rounded h-48 p-4 col-span-1 flex flex-col justify-between"
           :style="{ backgroundColor: note.bgColor }"
         >
           <p>
