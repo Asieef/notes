@@ -30,6 +30,7 @@ const addNote = () => {
   });
   showModal.value = false;
   newNote.value = "";
+  errorMessage.value = "";
 };
 
 const errorMessage = ref("");
@@ -52,7 +53,7 @@ const errorMessage = ref("");
           >
             <div class="flex flex-col gap-1">
               <textarea
-                v-model="newNote"
+                v-model.trim="newNote"
                 class="form-control block w-full h-32 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 id="exampleFormControlTextarea1"
                 rows="3"
