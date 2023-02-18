@@ -38,7 +38,7 @@ const errorMessage = ref("");
 
 <template>
   <div>
-    <div class="container mx-auto">
+    <div class="mx-auto">
       <!-- Modal Section -->
 
       <div
